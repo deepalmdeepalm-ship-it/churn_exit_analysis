@@ -49,7 +49,7 @@ input_data = pd.DataFrame({
 
 # One-hot encode 'Geograpy'
 geograpy_encoded = one_hot_encoder_geo.transform([[geograpy]]).toarray()
-geograpy_encoded_df = pd.DataFrame(geograpy_encoded, columns=one_hot_encoder_geo.get_feature_names_out(['Geograppipy']))
+geograpy_encoded_df = pd.DataFrame(geograpy_encoded, columns=one_hot_encoder_geo.get_feature_names_out(['Geograpy']))
 
 # Combine one-hot encoded columns with input data
 input_data = pd.concat([input_data.reset_index(drop=True), geograpy_encoded_df], axis=1)
