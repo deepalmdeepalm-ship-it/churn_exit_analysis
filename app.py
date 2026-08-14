@@ -16,7 +16,7 @@ with open('one_hot_encoder_geography.pkl', 'rb') as file:
     one_hot_encoder_geo = pickle.load(file)
 
 with open('ss.pkl', 'rb') as file:
-    ss=pickle.load(file)
+    scalar=pickle.load(file)
 
 
 ## streamlit app
