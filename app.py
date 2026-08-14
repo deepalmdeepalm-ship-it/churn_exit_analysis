@@ -13,7 +13,7 @@ with open('Label_Encoder_gender.pkl', 'rb') as file:
     label_encoder_gender = pickle.load(file)
 
 with open('one_hot_encoder_geography.pkl', 'rb') as file:
-    one_hot_encoder_geo = pickle.load(file)
+    one_hot_encoder_geography = pickle.load(file)
 
 with open('ss.pkl', 'rb') as file:
     scalar = pickle.load(file)
@@ -23,7 +23,7 @@ with open('ss.pkl', 'rb') as file:
 st.title('Customer Churn PRediction')
 
 # User input
-geograpy = st.selectbox('Geograpy', one_hot_encoder_geo.categories_[0])
+geography = st.selectbox('Geograpy', one_hot_encoder_geography.categories_[0])
 gender = st.selectbox('Gender', label_encoder_gender.classes_)
 age = st.slider('Age', 18, 92)
 balance = st.number_input('Balance')
@@ -48,14 +48,14 @@ input_data = pd.DataFrame({
 })
 
 # One-hot encode 'Geograpy'
-geograpy_encoded = one_hot_encoder_geo.transform([[geograpy]]).toarray()
-geograpy_encoded_df = pd.DataFrame(geograpy_encoded, columns=one_hot_encoder_geo.get_feature_names_out(['Geograpy']))
+geography_encoded = one_hot_encoder_geography.transform([[geography]]).toarray()
+geography_encoded_df = pd.DataFrame(geography_encoded, columns=one_hot_encoder_geography.get_feature_names_out(['Geography']))
 
 # Combine one-hot encoded columns with input data
-input_data = pd.concat([input_data.reset_index(drop=True), geograpy_encoded_df], axis=1)
+input_data = pd.concat([input_data.reset_index(drop=True), geography_encoded_df], axis=1)
 
 # Scale the input data
-input_data_scaled = scalar.transform(input_data)
+input_data_scaled = ss.transform(input_data)
 
 
 # Predict churn
